@@ -1,4 +1,4 @@
-FILE SERVER
+CHAT SERVER
 TUJUAN: melayani client dalam mengirim request
 
 ATURAN PROTOKOL:
