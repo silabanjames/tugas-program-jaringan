@@ -28,7 +28,7 @@ class ProcessTheClient(threading.Thread):
 	
 	# Fungsi mengirim pesan ke server sebelah
 	def sendToOtherServer(self, otherserver_connection, data):
-		logging.warning('Isi data sebelum dikirim ke server sebelah =', data)
+		logging.warning('Isi data sebelum dikirim ke server sebelah = {}'.format(data))
 		otherserver_connection.sendall(data.encode())
 
 		rcv = ""

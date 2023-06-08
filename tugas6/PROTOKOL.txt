@@ -1,0 +1,69 @@
+FILE SERVER
+TUJUAN: melayani client dalam mengirim request
+
+ATURAN PROTOKOL:
+- client harus mengirimkan request dalam bentuk string
+- string harus dalam format
+  REQUEST spasi PARAMETER
+- PARAMETER sesuai dengan jenis request client
+
+REQUEST YANG DILAYANI:
+- informasi umum:
+  * Jika command tidak dikenali akan menghasilkan pesan
+    - status: ERROR
+    - message: Protocol Tidak Benar
+  * Jika melakukan request tanpa authentikasi (selain request auth):
+    - status: ERROR
+    - message: Session Tidak Ditemukan
+  * Semua result akan diberikan dalam bentuk JSON dan diakhiri
+    dengan character ascii code #13#10#13#10 atau "\r\n\r\n"
+
+AUTH
+* TUJUAN: memverifikasi user
+* PARAMETER:
+    - PARAMETER1 : username
+    - PARAMETER2 : password
+* RESULT:
+- BERHASIL:
+  - status: OK
+  - tokenid: tokenid
+- GAGAL:
+  - status: ERROR
+  - message: pesan kesalahan
+
+SEND
+* TUJUAN: mengirimkan pesan ke spesifik clien
+* PARAMETER:
+  - PARAMETER1 : username destinasi
+  - PARAMETER2 : pesan
+* RESULT:
+- BERHASIL:
+  - status: OK
+  - message: Message Sent
+- GAGAL:
+  - status: ERROR
+  - data: pesan kesalahan
+
+INBOX
+* TUJUAN: untuk mengupload file ke dalam server
+* PARAMETER:tidak ada
+* RESULT:
+- BERHASIL:
+  - status: OK
+  - messages: dict pesan
+- GAGAL:
+  - status: ERROR
+  - message: pesan kesalahan
+
+
+GROUP
+* TUJUAN: untuk menghapus file yang disebutkan dalam parameter
+* PARAMETER:
+  - PARAMETER1 : nama grup
+* RESULT:
+- BERHASIL:
+  - status: OK
+  - data: keterangan telah keluar dari grup
+* KETERANGAN:
+- tidak ada pesan kesalahan pada command GROUP, sehingga bila tidak ada grup berdasarkan nama grup yang dimasukkan,
+  akan dibuat grup yang baru
